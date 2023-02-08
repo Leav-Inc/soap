@@ -9,7 +9,9 @@ defmodule Soap.Request do
 
   Calling HTTPoison request by Map with method, url, body, headers, options keys.
   """
-  @spec call(wsdl :: map(), operation :: String.t(), params :: any(), headers :: any(), opts :: any()) :: any()
+  @spec call(wsdl :: map(), operation :: String.t(), params :: any(), headers :: any(), opts :: any()) ::
+          {:ok, HTTPoison.Response.t() | HTTPoison.AsyncResponse.t() | HTTPoison.MaybeRedirect.t()}
+          | {:error, HTTPoison.Error.t()}
   def call(wsdl, operation, soap_headers_and_params, request_headers \\ [], opts \\ [])
 
   def call(wsdl, operation, {soap_headers, params}, request_headers, opts) do
